@@ -6,11 +6,11 @@ const DUE_DATE = 1;
 const GRACE_DAYS = 4;
 
 /**
- * Fixed reference date for the demo — June 3 falls inside the June grace window (1st–5th),
- * so June 2026 unpaid payments show as "outstanding" and May as "overdue".
+ * Fixed reference date for the demo — November 3 falls inside the November grace window (1st–5th),
+ * so November 2026 unpaid payments show as "outstanding" and October as "overdue".
  * Tests always pass an explicit `now`, so they are unaffected.
  */
-export const DEMO_DATE = new Date("2026-06-03T12:00:00.000Z");
+export const DEMO_DATE = new Date("2026-11-03T12:00:00.000Z");
 
 const startOfDay = (date: Date): Date =>
   new Date(date.getFullYear(), date.getMonth(), date.getDate());
