@@ -71,8 +71,14 @@ export const FilterAndSearchSection = ({
           {filterOpen && (
             <FilterPopup
               appliedRows={appliedFilterRows}
-              onApply={(rows) => { setAppliedFilterRows(rows); setFilterOpen(false); }}
-              onClear={() => { setAppliedFilterRows([]); setFilterOpen(false); }}
+              onApply={(rows) => {
+                setAppliedFilterRows(rows);
+                setFilterOpen(false);
+              }}
+              onClear={() => {
+                setAppliedFilterRows([]);
+                setFilterOpen(false);
+              }}
               colLabels={colLabels}
               defaultCol={defaultCol}
               getOptions={getOptions}
@@ -108,7 +114,8 @@ export const FilterAndSearchSection = ({
           {appliedFilterRows
             .filter((r) => r.value)
             .map((row) => {
-              const label = getOptions(row.col).find((o) => o.value === row.value)?.label ?? row.value;
+              const label =
+                getOptions(row.col).find((o) => o.value === row.value)?.label ?? row.value;
               return (
                 <span
                   key={row.id}

@@ -33,9 +33,7 @@ export const FilterPopup = ({
   const nextId = useRef(1);
 
   const [draftRows, setDraftRows] = useState<GenericFilterRow[]>(
-    appliedRows.length > 0
-      ? appliedRows
-      : [{ id: nextId.current++, col: defaultCol, value: "" }],
+    appliedRows.length > 0 ? appliedRows : [{ id: nextId.current++, col: defaultCol, value: "" }],
   );
 
   const colOptions = (Object.keys(colLabels) as string[]).map((k) => ({
@@ -46,14 +44,11 @@ export const FilterPopup = ({
   const addRow = () =>
     setDraftRows((prev) => [...prev, { id: nextId.current++, col: defaultCol, value: "" }]);
 
-  const removeRow = (id: number) =>
-    setDraftRows((prev) => prev.filter((r) => r.id !== id));
+  const removeRow = (id: number) => setDraftRows((prev) => prev.filter((r) => r.id !== id));
 
   const updateRow = (id: number, patch: Partial<GenericFilterRow>) =>
     setDraftRows((prev) =>
-      prev.map((r) =>
-        r.id === id ? { ...r, ...patch, ...(patch.col ? { value: "" } : {}) } : r,
-      ),
+      prev.map((r) => (r.id === id ? { ...r, ...patch, ...(patch.col ? { value: "" } : {}) } : r)),
     );
 
   const hasAny = draftRows.length > 0 || appliedRows.length > 0;
@@ -102,7 +97,10 @@ export const FilterPopup = ({
       <div className="flex gap-2 px-4 py-3 border-t border-sand-200">
         {hasAny && (
           <button
-            onClick={() => { setDraftRows([]); onClear(); }}
+            onClick={() => {
+              setDraftRows([]);
+              onClear();
+            }}
             className="flex-1 h-9 rounded-lg border border-sand-400 text-[13px] font-medium text-espresso-700 hover:bg-sand-100 transition-colors"
           >
             {sf.clearAllFilters}

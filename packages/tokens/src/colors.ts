@@ -43,10 +43,10 @@ export const colors = {
   info: "#5C7196",
   // Chart palette (draws from brand primitives)
   chart: {
-    paid: "#467173",      // teal-700
+    paid: "#467173", // teal-700
     outstanding: "#C98A12", // warning
-    overdue: "#C8341B",   // destructive
-    expected: "#CDE2E3",  // teal-200
+    overdue: "#C8341B", // destructive
+    expected: "#CDE2E3", // teal-200
     collected: "#FF6139", // coral-500
   },
 } as const;

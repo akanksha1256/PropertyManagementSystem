@@ -37,37 +37,50 @@ const PropertyCardUnits = ({
 }) => {
   const { data, isLoading } = usePropertyDetail(propertyId);
 
-  if (isLoading) return (
-    <div className="border-t border-sand-200 px-4 py-3 text-[12.5px] text-muted-foreground">
-      Loading units…
-    </div>
-  );
-  if (!data?.units.length) return (
-    <div className="border-t border-sand-200 px-4 py-3 text-[12.5px] text-muted-foreground italic">
-      {spl.noUnitsFound}
-    </div>
-  );
+  if (isLoading)
+    return (
+      <div className="border-t border-sand-200 px-4 py-3 text-[12.5px] text-muted-foreground">
+        Loading units…
+      </div>
+    );
+  if (!data?.units.length)
+    return (
+      <div className="border-t border-sand-200 px-4 py-3 text-[12.5px] text-muted-foreground italic">
+        {spl.noUnitsFound}
+      </div>
+    );
 
   const badgeVariant = (status: string) =>
-    status === "overdue" ? "overdue"
-    : status === "outstanding" ? "outstanding"
-    : status === "paid" ? "paid"
-    : status === "upcoming" ? "upcoming"
-    : "vacant" as const;
+    status === "overdue"
+      ? "overdue"
+      : status === "outstanding"
+        ? "outstanding"
+        : status === "paid"
+          ? "paid"
+          : status === "upcoming"
+            ? "upcoming"
+            : ("vacant" as const);
 
   const badgeLabel = (status: string) =>
-    status === "vacant" ? spl.groups.vacant
-    : status === "overdue" ? spl.groups.overdue
-    : status === "outstanding" ? spl.groups.outstanding
-    : status === "upcoming" ? spl.groups.upcoming
-    : spl.groups.paid;
+    status === "vacant"
+      ? spl.groups.vacant
+      : status === "overdue"
+        ? spl.groups.overdue
+        : status === "outstanding"
+          ? spl.groups.outstanding
+          : status === "upcoming"
+            ? spl.groups.upcoming
+            : spl.groups.paid;
 
   return (
     <div className="border-t border-sand-200">
       {data.units.map((unit: UnitDetailItem) => (
         <div
           key={unit.id}
-          onClick={(e) => { e.stopPropagation(); onNav(unit.id); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onNav(unit.id);
+          }}
           className="flex items-center gap-3 px-4 py-2.5 border-b border-sand-100 last:border-0 bg-sand-100/40 cursor-pointer active:bg-coral-50/60 transition-colors"
         >
           <span className="font-mono text-[12px] font-semibold text-espresso-700 bg-white border border-sand-400 px-2 py-0.5 rounded flex-none">
@@ -107,21 +120,27 @@ const PropertyCardItem = ({
 }) => {
   const isUrgent = property.status === "overdue";
   return (
-    <div className={`border-b border-sand-200 last:border-0 ${isUrgent ? "border-l-[3px] border-l-destructive" : ""}`}>
+    <div
+      className={`border-b border-sand-200 last:border-0 ${isUrgent ? "border-l-[3px] border-l-destructive" : ""}`}
+    >
       <div
         onClick={onToggle}
         className={`px-4 py-4 cursor-pointer transition-colors ${isUrgent ? "active:bg-coral-50" : "active:bg-coral-50/40"}`}
       >
         <div className="flex items-start justify-between gap-2 mb-2">
           <div className="flex-1 min-w-0">
-            <div className="text-[14px] font-semibold text-espresso-900 truncate">{property.name}</div>
+            <div className="text-[14px] font-semibold text-espresso-900 truncate">
+              {property.name}
+            </div>
             <div className="text-[12.5px] text-muted-foreground truncate">{property.address}</div>
           </div>
           <StatusMixBar property={property} />
         </div>
         <div className="flex items-center justify-between gap-2">
           <span className="text-[13px] text-espresso-700">
-            <span className="font-semibold">{property.leasedCount}/{property.unitCount}</span>
+            <span className="font-semibold">
+              {property.leasedCount}/{property.unitCount}
+            </span>
             <span className="text-muted-foreground text-[12px] ml-1">{spl.occupied}</span>
           </span>
           <div className="flex items-center gap-2">
@@ -130,18 +149,16 @@ const PropertyCardItem = ({
                 ${property.totalRent.toLocaleString()}/mo
               </span>
             )}
-            {expanded
-              ? <ChevronDownIcon className="h-3.5 w-3.5 text-muted-foreground flex-none" />
-              : <ChevronRightIcon className="h-3.5 w-3.5 text-muted-foreground flex-none" />}
+            {expanded ? (
+              <ChevronDownIcon className="h-3.5 w-3.5 text-muted-foreground flex-none" />
+            ) : (
+              <ChevronRightIcon className="h-3.5 w-3.5 text-muted-foreground flex-none" />
+            )}
           </div>
         </div>
       </div>
       {expanded && (
-        <PropertyCardUnits
-          propertyId={property.id}
-          onNav={onUnitNav}
-          onAddLease={onAddLease}
-        />
+        <PropertyCardUnits propertyId={property.id} onNav={onUnitNav} onAddLease={onAddLease} />
       )}
     </div>
   );

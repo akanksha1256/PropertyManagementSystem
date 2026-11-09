@@ -16,7 +16,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     const lease = db.leases.find((l) => l.tenant_id === tenant.id) ?? null;
     const unit = lease ? (db.units.find((u) => u.id === lease.unit_id) ?? null) : null;
     const property = unit ? (db.properties.find((p) => p.id === unit.property_id) ?? null) : null;
-    const payments = lease ? resolvePayments(db.payments.filter((p) => p.lease_id === lease.id)) : [];
+    const payments = lease
+      ? resolvePayments(db.payments.filter((p) => p.lease_id === lease.id))
+      : [];
 
     let standing: TenantStanding | null = null;
     if (payments.length > 0) {

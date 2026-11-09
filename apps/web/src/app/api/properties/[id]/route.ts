@@ -28,9 +28,13 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
             const payments = resolvePayments(db.payments.filter((p) => p.lease_id === lease.id));
             const overdue = payments.find((p) => p.status === "overdue");
             const outstanding = payments.find((p) => p.status === "outstanding");
-            if (overdue) { payment_status = "overdue"; current_period_month = overdue.period_month; }
-            else if (outstanding) { payment_status = "outstanding"; current_period_month = outstanding.period_month; }
-            else payment_status = "paid";
+            if (overdue) {
+              payment_status = "overdue";
+              current_period_month = overdue.period_month;
+            } else if (outstanding) {
+              payment_status = "outstanding";
+              current_period_month = outstanding.period_month;
+            } else payment_status = "paid";
           }
         }
 

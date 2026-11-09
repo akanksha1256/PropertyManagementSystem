@@ -5,11 +5,21 @@ export const PaymentHistoryTableSkeleton = ({ withActions = false }: { withActio
     <table className="w-full table-auto min-w-[600px]">
       <thead>
         <tr className="bg-sand-100 border-b border-sand-400">
-          <th className="px-5 py-3 text-left"><Skeleton className="h-3 w-12" /></th>
-          <th className="px-5 py-3 text-right"><Skeleton className="h-3 w-20 ml-auto" /></th>
-          <th className="px-5 py-3 text-right"><Skeleton className="h-3 w-16 ml-auto" /></th>
-          <th className="px-5 py-3 text-right"><Skeleton className="h-3 w-14 ml-auto" /></th>
-          <th className="px-5 py-3 text-right"><Skeleton className="h-3 w-12 ml-auto" /></th>
+          <th className="px-5 py-3 text-left">
+            <Skeleton className="h-3 w-12" />
+          </th>
+          <th className="px-5 py-3 text-right">
+            <Skeleton className="h-3 w-20 ml-auto" />
+          </th>
+          <th className="px-5 py-3 text-right">
+            <Skeleton className="h-3 w-16 ml-auto" />
+          </th>
+          <th className="px-5 py-3 text-right">
+            <Skeleton className="h-3 w-14 ml-auto" />
+          </th>
+          <th className="px-5 py-3 text-right">
+            <Skeleton className="h-3 w-12 ml-auto" />
+          </th>
           {withActions && <th className="px-5 py-3" />}
         </tr>
       </thead>

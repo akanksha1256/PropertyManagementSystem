@@ -39,7 +39,12 @@ export const AtRiskLeasesSection = ({ atRiskLeases }: { atRiskLeases: AtRiskLeas
     <div className="bg-white p-6">
       <div className="flex items-center justify-between mb-4">
         <Overline>{s.atRiskTitle}</Overline>
-        <Button variant="ghost" size="sm" onClick={() => router.push("/manager/payments")} className="gap-1">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => router.push("/manager/payments")}
+          className="gap-1"
+        >
           {s.viewAll}
           <ChevronRightIcon className="h-3.5 w-3.5" />
         </Button>

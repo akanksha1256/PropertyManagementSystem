@@ -184,28 +184,28 @@ import type { Payment } from "@/platform/types";
 
 // ❌ Never
 import type { Payment } from "@/platform/types"; // in components, views, or hooks
-import type { Payment } from "../../types";        // relative cross-boundary import
+import type { Payment } from "../../types"; // relative cross-boundary import
 ```
 
 ---
 
 ## 3. API Routes
 
-| Method | Path                                | Description                    | Returns                                                   |
-| ------ | ----------------------------------- | ------------------------------ | --------------------------------------------------------- |
+| Method | Path                                | Description                    | Returns                                                     |
+| ------ | ----------------------------------- | ------------------------------ | ----------------------------------------------------------- |
 | GET    | `/api/manager/dashboard`            | Portfolio-level overview       | `ManagerDashboardData` (incl. `statsTrend`, `atRiskLeases`) |
-| GET    | `/api/manager/payments`             | Cross-portfolio payment list   | `PaymentListItem[]`                                       |
-| GET    | `/api/properties/[id]`              | Property header + all units    | `PropertyDetailData`                                      |
-| GET    | `/api/tenants`                      | Full tenant list               | `TenantListItem[]`                                        |
-| POST   | `/api/tenants`                      | Create a new tenant            | `{ tenant: Tenant }`                                      |
-| GET    | `/api/tenants/[id]`                 | Tenant dashboard (tenant view) | `{ dashboard: TenantDashboardData, payments: Payment[] }` |
-| GET    | `/api/tenants/[id]/profile`         | Tenant profile (manager view)  | `TenantProfile`                                           |
-| GET    | `/api/tenants/[id]/payment-methods` | Saved payment methods          | `PaymentMethod[]`                                         |
-| POST   | `/api/tenants/[id]/payment-methods` | Add a new payment method       | `PaymentMethod`                                           |
-| GET    | `/api/leases/[id]/payments`         | Payment history for a lease    | `Payment[]`                                               |
-| POST   | `/api/leases/[id]/pay`              | Mark payment as paid           | `Payment`                                                 |
-| POST   | `/api/leases/[id]/remind`           | Send payment reminder          | `Payment` (with updated `lastRemindedOn`)                 |
-| POST   | `/api/leases`                       | Create a new lease             | `{ lease: Lease }`                                        |
+| GET    | `/api/manager/payments`             | Cross-portfolio payment list   | `PaymentListItem[]`                                         |
+| GET    | `/api/properties/[id]`              | Property header + all units    | `PropertyDetailData`                                        |
+| GET    | `/api/tenants`                      | Full tenant list               | `TenantListItem[]`                                          |
+| POST   | `/api/tenants`                      | Create a new tenant            | `{ tenant: Tenant }`                                        |
+| GET    | `/api/tenants/[id]`                 | Tenant dashboard (tenant view) | `{ dashboard: TenantDashboardData, payments: Payment[] }`   |
+| GET    | `/api/tenants/[id]/profile`         | Tenant profile (manager view)  | `TenantProfile`                                             |
+| GET    | `/api/tenants/[id]/payment-methods` | Saved payment methods          | `PaymentMethod[]`                                           |
+| POST   | `/api/tenants/[id]/payment-methods` | Add a new payment method       | `PaymentMethod`                                             |
+| GET    | `/api/leases/[id]/payments`         | Payment history for a lease    | `Payment[]`                                                 |
+| POST   | `/api/leases/[id]/pay`              | Mark payment as paid           | `Payment`                                                   |
+| POST   | `/api/leases/[id]/remind`           | Send payment reminder          | `Payment` (with updated `lastRemindedOn`)                   |
+| POST   | `/api/leases`                       | Create a new lease             | `{ lease: Lease }`                                          |
 
 ### Shared Route Convention
 
@@ -283,24 +283,24 @@ Always use `onSettled` (not `onSuccess`) for `invalidateQueries` - it fires for 
 
 ### All Hooks Summary
 
-| Hook                                   | Type     | Query Key                                         | Description                                    |
-| -------------------------------------- | -------- | ------------------------------------------------- | ---------------------------------------------- |
-| `useManagerDashboard`                  | query    | `["manager", "dashboard"]`                        | Stats, trends, charts, at-risk leases          |
-| `usePropertyDetail(id)`                | query    | `["property", "detail", id]`                      | Property + all units                           |
-| `useTenantProfile(id)`                 | query    | `["tenant", "profile", id]`                       | Profile + standing (manager view)              |
-| `useTenantDashboard(id)`               | query    | `["tenant", "dashboard", id]`                     | Lease, property, payments (tenant view)        |
-| `usePayments(leaseId)`                 | query    | `["payments", leaseId]`                           | Payment history list                           |
-| `usePaymentMethods(tenantId)`          | query    | `["paymentMethods", tenantId]`                    | Saved payment methods                          |
-| `useAllPayments()`                     | query    | `["payments", "all"]`                             | Cross-portfolio payment list                   |
-| `useAllTenants()`                      | query    | `["tenants", "all"]`                              | Full tenant list with lease/property context   |
-| `useMarkPaid(leaseId)`                 | mutation | optimistic on `["payments", leaseId]`             | Manager mark-paid with rollback                |
-| `usePayRent(tenantId, leaseId)`        | mutation | optimistic on `["tenant", "dashboard", tenantId]` | Tenant pay rent with rollback                  |
-| `useSendReminder(leaseId)`             | mutation | patches `["payments", leaseId]` cache             | Send email reminder                            |
-| `useSendAllReminders()`                | mutation | -                                                 | Bulk send reminders to all at-risk leases      |
-| `useAddPaymentMethod(tenantId)`        | mutation | appends to `["paymentMethods", tenantId]`         | Add payment method                             |
-| `useCreateProperty()`                  | mutation | invalidates `["manager", "dashboard"]`            | Create a new property                          |
-| `useCreateLease(propertyId)`           | mutation | invalidates property + dashboard + tenants        | Create a new lease; also calls useCreateTenant inline if needed |
-| `useCreateTenant()`                    | mutation | invalidates `["tenants", "all"]`                  | Create a new tenant                            |
+| Hook                            | Type     | Query Key                                         | Description                                                     |
+| ------------------------------- | -------- | ------------------------------------------------- | --------------------------------------------------------------- |
+| `useManagerDashboard`           | query    | `["manager", "dashboard"]`                        | Stats, trends, charts, at-risk leases                           |
+| `usePropertyDetail(id)`         | query    | `["property", "detail", id]`                      | Property + all units                                            |
+| `useTenantProfile(id)`          | query    | `["tenant", "profile", id]`                       | Profile + standing (manager view)                               |
+| `useTenantDashboard(id)`        | query    | `["tenant", "dashboard", id]`                     | Lease, property, payments (tenant view)                         |
+| `usePayments(leaseId)`          | query    | `["payments", leaseId]`                           | Payment history list                                            |
+| `usePaymentMethods(tenantId)`   | query    | `["paymentMethods", tenantId]`                    | Saved payment methods                                           |
+| `useAllPayments()`              | query    | `["payments", "all"]`                             | Cross-portfolio payment list                                    |
+| `useAllTenants()`               | query    | `["tenants", "all"]`                              | Full tenant list with lease/property context                    |
+| `useMarkPaid(leaseId)`          | mutation | optimistic on `["payments", leaseId]`             | Manager mark-paid with rollback                                 |
+| `usePayRent(tenantId, leaseId)` | mutation | optimistic on `["tenant", "dashboard", tenantId]` | Tenant pay rent with rollback                                   |
+| `useSendReminder(leaseId)`      | mutation | patches `["payments", leaseId]` cache             | Send email reminder                                             |
+| `useSendAllReminders()`         | mutation | -                                                 | Bulk send reminders to all at-risk leases                       |
+| `useAddPaymentMethod(tenantId)` | mutation | appends to `["paymentMethods", tenantId]`         | Add payment method                                              |
+| `useCreateProperty()`           | mutation | invalidates `["manager", "dashboard"]`            | Create a new property                                           |
+| `useCreateLease(propertyId)`    | mutation | invalidates property + dashboard + tenants        | Create a new lease; also calls useCreateTenant inline if needed |
+| `useCreateTenant()`             | mutation | invalidates `["tenants", "all"]`                  | Create a new tenant                                             |
 
 ---
 
@@ -361,23 +361,23 @@ export function mapPayment(raw: P.Payment): Payment {
 // Column definition
 interface TableColumn {
   label: string;
-  align?: "left" | "right";  // defaults to "left"
-  className?: string;         // e.g. "w-48" - works because table uses table-auto, not table-fixed
+  align?: "left" | "right"; // defaults to "left"
+  className?: string; // e.g. "w-48" - works because table uses table-auto, not table-fixed
   sortable?: boolean;
 }
 
 // Cell definition
 interface TableCell {
-  content: React.ReactNode;  // any JSX
-  className?: string;        // overrides td padding/alignment if needed
+  content: React.ReactNode; // any JSX
+  className?: string; // overrides td padding/alignment if needed
   sortValue?: string | number; // used for client-side sort; falls back to content string if omitted
 }
 
 // Row definition
 interface TableRow {
   key: string;
-  onClick?: () => void;  // makes the row clickable (cursor-pointer, hover highlight)
-  cells: TableCell[];    // must align with columns array length
+  onClick?: () => void; // makes the row clickable (cursor-pointer, hover highlight)
+  cells: TableCell[]; // must align with columns array length
 }
 ```
 
@@ -387,7 +387,9 @@ To right-align a `<Pill>` (which is `inline-flex`) inside a cell, wrap it in a f
 
 ```tsx
 // ✅
-content: <div className="flex justify-end"><Pill status={row.status} /></div>
+content: <div className="flex justify-end">
+  <Pill status={row.status} />
+</div>;
 
 // ❌ text-right on the column align has no effect on inline-flex
 ```
@@ -408,7 +410,7 @@ const insideDropdown = dropdownRef.current?.contains(target);
 // Menu items must suppress mousedown so the portal doesn't close before click
 <button onMouseDown={(e) => e.stopPropagation()} onClick={handleAction}>
   Action
-</button>
+</button>;
 ```
 
 Callers pass an `items` array - each item needs `label` and `onClick`. The positioning is computed from `buttonRef.current.getBoundingClientRect()` at open time.
@@ -437,19 +439,19 @@ import { toast } from "sonner";
 const buttonVariants = cva("inline-flex ... focus-visible:ring-ring disabled:opacity-50", {
   variants: {
     variant: {
-      default:     "rounded-full bg-coral-500 text-white shadow-sm hover:bg-coral-600",
-      secondary:   "rounded-full bg-sand-200 text-espresso-900 hover:bg-sand-400",
-      outline:     "rounded-full border border-sand-400 bg-white text-maroon-600 hover:bg-sand-100",
-      ghost:       "rounded-full bg-transparent text-maroon-600 hover:bg-sand-100",
-      teal:        "rounded-full bg-teal-600 text-white hover:bg-teal-700",
+      default: "rounded-full bg-coral-500 text-white shadow-sm hover:bg-coral-600",
+      secondary: "rounded-full bg-sand-200 text-espresso-900 hover:bg-sand-400",
+      outline: "rounded-full border border-sand-400 bg-white text-maroon-600 hover:bg-sand-100",
+      ghost: "rounded-full bg-transparent text-maroon-600 hover:bg-sand-100",
+      teal: "rounded-full bg-teal-600 text-white hover:bg-teal-700",
       destructive: "rounded-full bg-destructive text-white hover:bg-red-800",
-      link:        "text-coral-500 underline-offset-4 hover:underline rounded-md",
+      link: "text-coral-500 underline-offset-4 hover:underline rounded-md",
     },
     size: {
       default: "h-control-md px-5 text-[14px]",
-      sm:      "h-control-sm px-4 text-[13px]",
-      lg:      "h-control-lg px-6 text-[15px]",
-      icon:    "h-control-md w-control-md rounded-full",
+      sm: "h-control-sm px-4 text-[13px]",
+      lg: "h-control-lg px-6 text-[15px]",
+      icon: "h-control-md w-control-md rounded-full",
     },
   },
   defaultVariants: { variant: "default", size: "default" },
@@ -545,30 +547,32 @@ const pendingPayment = payingPeriodMonth
   : null;
 
 // Modal only renders when both conditions hold - it never has to handle "no payment" internally
-{payingPeriodMonth && pendingPayment && lease && (
-  <PayRentModal
-    tenantId={tenantId}
-    leaseId={lease.id}
-    periodMonth={payingPeriodMonth}
-    amountDue={pendingPayment.amountDue}
-    onClose={() => setPayingPeriodMonth(null)}
-  />
-)}
+{
+  payingPeriodMonth && pendingPayment && lease && (
+    <PayRentModal
+      tenantId={tenantId}
+      leaseId={lease.id}
+      periodMonth={payingPeriodMonth}
+      amountDue={pendingPayment.amountDue}
+      onClose={() => setPayingPeriodMonth(null)}
+    />
+  );
+}
 ```
 
 ### View Map
 
-| View Component     | Route                                     | Hook(s) Used                                                                       |
-| ------------------ | ----------------------------------------- | ---------------------------------------------------------------------------------- |
-| `ManagerDashboard` | `/manager`                                | `useManagerDashboard`                                                              |
-| `PaymentsPage`     | `/manager/payments`                       | `useAllPayments`                                                                   |
-| `PropertiesList`   | `/manager/properties`                     | `useManagerDashboard`, `useCreateProperty`                                         |
-| `PropertyDetail`   | `/manager/properties/[id]`                | `usePropertyDetail`, `useCreateLease`, `useCreateTenant`, `useAllTenants`          |
-| `UnitDetail`       | `/manager/properties/[id]/units/[unitId]` | `usePropertyDetail`, `usePayments`, `useMarkPaid`, `useSendReminder`               |
-| `TenantsList`      | `/manager/tenants`                        | `useAllTenants`, `useCreateTenant`                                                 |
-| `TenantProfile`    | `/manager/tenants/[id]`                   | `useTenantProfile`                                                                 |
-| `TenantDashboard`  | `/tenant`                                 | `useTenantDashboard`                                                               |
-| `PayRentModal`     | modal inside `/tenant`                    | `usePaymentMethods`, `usePayRent`, `useAddPaymentMethod`                           |
+| View Component     | Route                                     | Hook(s) Used                                                              |
+| ------------------ | ----------------------------------------- | ------------------------------------------------------------------------- |
+| `ManagerDashboard` | `/manager`                                | `useManagerDashboard`                                                     |
+| `PaymentsPage`     | `/manager/payments`                       | `useAllPayments`                                                          |
+| `PropertiesList`   | `/manager/properties`                     | `useManagerDashboard`, `useCreateProperty`                                |
+| `PropertyDetail`   | `/manager/properties/[id]`                | `usePropertyDetail`, `useCreateLease`, `useCreateTenant`, `useAllTenants` |
+| `UnitDetail`       | `/manager/properties/[id]/units/[unitId]` | `usePropertyDetail`, `usePayments`, `useMarkPaid`, `useSendReminder`      |
+| `TenantsList`      | `/manager/tenants`                        | `useAllTenants`, `useCreateTenant`                                        |
+| `TenantProfile`    | `/manager/tenants/[id]`                   | `useTenantProfile`                                                        |
+| `TenantDashboard`  | `/tenant`                                 | `useTenantDashboard`                                                      |
+| `PayRentModal`     | modal inside `/tenant`                    | `usePaymentMethods`, `usePayRent`, `useAddPaymentMethod`                  |
 
 ---
 
@@ -676,7 +680,9 @@ Every data table that appears on the manager side uses the same two-section frag
 <>
   {/* Mobile: card view */}
   <div className="sm:hidden flex-1 overflow-y-auto ...">
-    {items.map((item) => <CardRow key={item.id} item={item} />)}
+    {items.map((item) => (
+      <CardRow key={item.id} item={item} />
+    ))}
   </div>
 
   {/* Desktop: table view */}
@@ -692,11 +698,11 @@ The outer wrapper adds `flex flex-col overflow-hidden` so both children can use 
 
 Skeleton screens (`*LoadingScreen.tsx`) use the same breakpoint classes as the live content they replace:
 
-| Live component | Skeleton grid |
-|---|---|
-| `SummaryCardSection` — `grid-cols-1 sm:grid-cols-3` | `PaymentsListSkeleton` — same |
-| `StatusSection` — `grid-cols-2 lg:grid-cols-4` | `ManagerDashboardSkeleton` — same |
-| Charts — `grid-cols-1 md:grid-cols-[1.5fr_1fr]` | `ManagerDashboardSkeleton` — same |
+| Live component                                                | Skeleton grid                       |
+| ------------------------------------------------------------- | ----------------------------------- |
+| `SummaryCardSection` — `grid-cols-1 sm:grid-cols-3`           | `PaymentsListSkeleton` — same       |
+| `StatusSection` — `grid-cols-2 lg:grid-cols-4`                | `ManagerDashboardSkeleton` — same   |
+| Charts — `grid-cols-1 md:grid-cols-[1.5fr_1fr]`               | `ManagerDashboardSkeleton` — same   |
 | `PaymentsTable` — `sm:hidden` cards + `hidden sm:block` table | `PaymentsListSkeleton` — same split |
 
 This means the skeleton layout does not shift when data arrives.

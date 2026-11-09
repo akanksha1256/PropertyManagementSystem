@@ -67,7 +67,8 @@ export function RowMenu({ items }: Props) {
         <MoreVertical className="h-4 w-4" />
       </button>
 
-      {open && pos &&
+      {open &&
+        pos &&
         createPortal(
           <div
             ref={dropdownRef}
@@ -97,7 +98,9 @@ export function RowMenu({ items }: Props) {
                     {item.loading && <Loader2 className="h-3.5 w-3.5 animate-spin opacity-60" />}
                   </span>
                   {item.sublabel && (
-                    <span className="text-[12px] font-normal text-muted-foreground">{item.sublabel}</span>
+                    <span className="text-[12px] font-normal text-muted-foreground">
+                      {item.sublabel}
+                    </span>
                   )}
                 </span>
               </button>

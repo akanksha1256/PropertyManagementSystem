@@ -29,9 +29,15 @@ export const TenantCurrentLeaseCard = ({ lease, unit, property }: Props) => (
             { label: s.property, value: property.name },
             { label: s.unit, value: unit.label },
             { label: s.monthlyRent, value: `$${lease.monthlyRent.toLocaleString()}/mo` },
-            { label: s.leaseDate, value: `${formatDate(lease.startDate)} → ${formatDate(lease.endDate)}` },
+            {
+              label: s.leaseDate,
+              value: `${formatDate(lease.startDate)} → ${formatDate(lease.endDate)}`,
+            },
           ].map(({ label, value }) => (
-            <div key={label} className="flex justify-between py-3 border-b border-sand-200 last:border-0">
+            <div
+              key={label}
+              className="flex justify-between py-3 border-b border-sand-200 last:border-0"
+            >
               <MutedText>{label}</MutedText>
               <MutedText className="font-medium text-espresso-900">{value}</MutedText>
             </div>

@@ -21,10 +21,7 @@ export const SectionTitle = ({ className, ...props }: React.HTMLAttributes<HTMLH
   />
 );
 
-export const SubpageTitle = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) => (
+export const SubpageTitle = ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
   <h1
     className={cn(
       "font-serif text-[32px] font-semibold leading-[1.1] tracking-[-0.01em] text-maroon-600",
@@ -34,10 +31,7 @@ export const SubpageTitle = ({
   />
 );
 
-export const ModalHeading = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) => (
+export const ModalHeading = ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
   <h2
     className={cn(
       "font-serif text-[28px] font-semibold leading-tight text-espresso-900",
@@ -98,10 +92,7 @@ export const PrimaryLabelSemibold = ({
   <div className={cn("text-[14px] font-semibold text-espresso-900", className)} {...props} />
 );
 
-export const MutedText = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLParagraphElement>) => (
+export const MutedText = ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
   <p className={cn("text-[13px] text-muted-foreground", className)} {...props} />
 );
 

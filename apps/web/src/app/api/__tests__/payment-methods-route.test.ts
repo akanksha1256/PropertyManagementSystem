@@ -25,7 +25,13 @@ const generateId = vi.fn((prefix: string) => `${prefix}-${idCounter++}`);
 vi.mock("@/platform/db", () => ({ db: mockDb, generateId }));
 vi.mock("@/platform/utils", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/platform/utils")>();
-  return { ...actual, withDelay: vi.fn().mockImplementation(async (req: import('next/server').NextRequest) => { if (req.nextUrl.searchParams.get('fail') === 'true') throw new Error('Forced failure (fail=true)'); }) };
+  return {
+    ...actual,
+    withDelay: vi.fn().mockImplementation(async (req: import("next/server").NextRequest) => {
+      if (req.nextUrl.searchParams.get("fail") === "true")
+        throw new Error("Forced failure (fail=true)");
+    }),
+  };
 });
 
 beforeEach(() => {
@@ -57,9 +63,7 @@ describe("GET /api/tenants/[id]/payment-methods", () => {
   });
 
   it("returns 500 when ?fail=true is set", async () => {
-    const req = new NextRequest(
-      "http://localhost/api/tenants/tenant-1/payment-methods?fail=true",
-    );
+    const req = new NextRequest("http://localhost/api/tenants/tenant-1/payment-methods?fail=true");
     const res = await GET(req, { params: { id: "tenant-1" } });
 
     expect(res.status).toBe(500);

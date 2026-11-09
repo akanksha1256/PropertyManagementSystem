@@ -2,12 +2,7 @@
 
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import {
-  useMarkPaid,
-  useSendReminder,
-  MANAGER_DASHBOARD_KEY,
-  propertyDetailKey,
-} from "@repo/data";
+import { useMarkPaid, useSendReminder, MANAGER_DASHBOARD_KEY, propertyDetailKey } from "@repo/data";
 import type { UnitDetailItem, PropertyDetailData } from "@repo/data";
 import { RowMenu, useToast } from "@repo/ui";
 import { strings } from "@repo/tokens";

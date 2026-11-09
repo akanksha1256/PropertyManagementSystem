@@ -23,7 +23,12 @@ interface ScoreRingProps {
   outerRadius?: number;
 }
 
-export const ScoreRing = ({ score, size = 120, innerRadius = 38, outerRadius = 52 }: ScoreRingProps) => {
+export const ScoreRing = ({
+  score,
+  size = 120,
+  innerRadius = 38,
+  outerRadius = 52,
+}: ScoreRingProps) => {
   const half = size / 2 - 5;
 
   if (score == null) {

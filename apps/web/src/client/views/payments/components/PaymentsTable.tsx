@@ -100,9 +100,7 @@ export const PaymentsTable = ({
               </MutedText>
               <div className="flex items-center gap-1.5 text-[12px] text-muted-foreground">
                 <span>{formatPeriod(item.payment.periodMonth)}</span>
-                {item.payment.paidDate && (
-                  <span>· {formatDate(item.payment.paidDate)}</span>
-                )}
+                {item.payment.paidDate && <span>· {formatDate(item.payment.paidDate)}</span>}
               </div>
             </div>
           </div>
@@ -111,75 +109,109 @@ export const PaymentsTable = ({
 
       {/* Desktop: table view */}
       <div className="hidden sm:flex flex-col flex-1 overflow-y-auto">
-      <table className="w-full table-auto min-w-[700px]">
-        <colgroup>
-          <col style={{ width: "22%" }} />
-          <col style={{ width: "20%" }} />
-          <col style={{ width: "12%" }} />
-          <col style={{ width: "13%" }} />
-          <col style={{ width: "14%" }} />
-          <col style={{ width: "14%" }} />
-          <col style={{ width: "40px" }} />
-        </colgroup>
-        <thead className="sticky top-0 z-10">
-          <tr className="bg-sand-100 border-b border-sand-400">
-            <th className="px-5 py-3 text-left">
-              <Overline>{s.cols.tenant}</Overline>
-            </th>
-            <SortableHeader col="property" label={s.cols.propertyUnit} sortCol={sortCol} sortDir={sortDir} onSort={onSort} />
-            <SortableHeader col="amount" label={s.cols.amount} align="right" sortCol={sortCol} sortDir={sortDir} onSort={onSort} />
-            <SortableHeader col="period" label={s.cols.period} sortCol={sortCol} sortDir={sortDir} onSort={onSort} />
-            <SortableHeader col="paidOn" label={s.cols.paidOn} sortCol={sortCol} sortDir={sortDir} onSort={onSort} />
-            <SortableHeader col="status" label={s.cols.status} align="right" sortCol={sortCol} sortDir={sortDir} onSort={onSort} />
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <tr
-              key={item.payment.id}
-              onClick={() => onRowClick(item.tenant.id)}
-              className="border-t border-sand-200 hover:bg-coral-50/50 cursor-pointer transition-colors group"
-            >
-              <td className="px-5 py-3.5">
-                <LinkText className="text-espresso-900 font-semibold leading-tight block">
-                  {item.tenant.name}
-                </LinkText>
-                <Caption>{item.tenant.email}</Caption>
-              </td>
-              <td className="px-5 py-3.5">
-                <MutedText className="text-espresso-900 font-medium">{item.property.name}</MutedText>
-                <Caption className="font-mono">{item.unit.label}</Caption>
-              </td>
-              <td className="px-5 py-3.5 text-right">
-                <MutedText className="text-espresso-900 font-semibold tabular-nums">
-                  ${item.payment.amountDue.toLocaleString()}
-                </MutedText>
-              </td>
-              <td className="px-5 py-3.5">
-                <MutedText className="text-espresso-700 font-medium">
-                  {formatPeriod(item.payment.periodMonth)}
-                </MutedText>
-              </td>
-              <td className="px-5 py-3.5">
-                <MutedText className="text-espresso-700">
-                  {formatDate(item.payment.paidDate)}
-                </MutedText>
-              </td>
-              <td className="px-5 py-3.5 text-right">
-                <div className="flex justify-end">
-                  <Badge variant={getStatusVariant(item.payment.status)} size="sm">
-                    {getStatusLabel(item.payment.status)}
-                  </Badge>
-                </div>
-              </td>
-              <td className="px-2 py-3.5" onClick={(e) => e.stopPropagation()}>
-                <PaymentRowMenu item={item} />
-              </td>
+        <table className="w-full table-auto min-w-[700px]">
+          <colgroup>
+            <col style={{ width: "22%" }} />
+            <col style={{ width: "20%" }} />
+            <col style={{ width: "12%" }} />
+            <col style={{ width: "13%" }} />
+            <col style={{ width: "14%" }} />
+            <col style={{ width: "14%" }} />
+            <col style={{ width: "40px" }} />
+          </colgroup>
+          <thead className="sticky top-0 z-10">
+            <tr className="bg-sand-100 border-b border-sand-400">
+              <th className="px-5 py-3 text-left">
+                <Overline>{s.cols.tenant}</Overline>
+              </th>
+              <SortableHeader
+                col="property"
+                label={s.cols.propertyUnit}
+                sortCol={sortCol}
+                sortDir={sortDir}
+                onSort={onSort}
+              />
+              <SortableHeader
+                col="amount"
+                label={s.cols.amount}
+                align="right"
+                sortCol={sortCol}
+                sortDir={sortDir}
+                onSort={onSort}
+              />
+              <SortableHeader
+                col="period"
+                label={s.cols.period}
+                sortCol={sortCol}
+                sortDir={sortDir}
+                onSort={onSort}
+              />
+              <SortableHeader
+                col="paidOn"
+                label={s.cols.paidOn}
+                sortCol={sortCol}
+                sortDir={sortDir}
+                onSort={onSort}
+              />
+              <SortableHeader
+                col="status"
+                label={s.cols.status}
+                align="right"
+                sortCol={sortCol}
+                sortDir={sortDir}
+                onSort={onSort}
+              />
+              <th />
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <tr
+                key={item.payment.id}
+                onClick={() => onRowClick(item.tenant.id)}
+                className="border-t border-sand-200 hover:bg-coral-50/50 cursor-pointer transition-colors group"
+              >
+                <td className="px-5 py-3.5">
+                  <LinkText className="text-espresso-900 font-semibold leading-tight block">
+                    {item.tenant.name}
+                  </LinkText>
+                  <Caption>{item.tenant.email}</Caption>
+                </td>
+                <td className="px-5 py-3.5">
+                  <MutedText className="text-espresso-900 font-medium">
+                    {item.property.name}
+                  </MutedText>
+                  <Caption className="font-mono">{item.unit.label}</Caption>
+                </td>
+                <td className="px-5 py-3.5 text-right">
+                  <MutedText className="text-espresso-900 font-semibold tabular-nums">
+                    ${item.payment.amountDue.toLocaleString()}
+                  </MutedText>
+                </td>
+                <td className="px-5 py-3.5">
+                  <MutedText className="text-espresso-700 font-medium">
+                    {formatPeriod(item.payment.periodMonth)}
+                  </MutedText>
+                </td>
+                <td className="px-5 py-3.5">
+                  <MutedText className="text-espresso-700">
+                    {formatDate(item.payment.paidDate)}
+                  </MutedText>
+                </td>
+                <td className="px-5 py-3.5 text-right">
+                  <div className="flex justify-end">
+                    <Badge variant={getStatusVariant(item.payment.status)} size="sm">
+                      {getStatusLabel(item.payment.status)}
+                    </Badge>
+                  </div>
+                </td>
+                <td className="px-2 py-3.5" onClick={(e) => e.stopPropagation()}>
+                  <PaymentRowMenu item={item} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

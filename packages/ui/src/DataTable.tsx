@@ -64,14 +64,22 @@ const CardRow = ({ row, columns }: { row: TableRow; columns: TableColumn[] }) =>
       onClick={onClick}
       role={onClick ? "button" : undefined}
       tabIndex={onClick ? 0 : undefined}
-      onKeyDown={onClick ? (e) => { if (e.key === "Enter" || e.key === " ") onClick(); } : undefined}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") onClick();
+            }
+          : undefined
+      }
       className={[
         "px-4 py-3 border-b border-sand-200 last:border-0 transition-colors",
         onClick ? "cursor-pointer active:bg-coral-50" : "",
         urgent ? "border-l-[3px] border-l-destructive pl-[calc(16px-3px)]" : "",
         flashState === "success" ? "flash-success" : "",
         flashState === "error" ? "flash-error" : "",
-      ].filter(Boolean).join(" ")}
+      ]
+        .filter(Boolean)
+        .join(" ")}
     >
       <div className="space-y-1.5">
         {labeled.map(({ cell, col }, i) => (
@@ -166,26 +174,26 @@ export function DataTable({ columns, rows = [], groups }: DataTableProps) {
     <>
       {/* Mobile: card layout (<sm) */}
       <div className="sm:hidden rounded-xl border border-sand-400 bg-white shadow-sm overflow-hidden">
-        {groups ? (
-          groups.map((group) => (
-            <React.Fragment key={group.label}>
-              <div className="px-4 py-2 bg-sand-100 border-b border-sand-400 sticky top-0">
-                <span className="inline-flex items-center gap-2 text-[11.5px] font-semibold uppercase tracking-[0.06em] text-maroon-600">
-                  <span className={`w-2 h-2 rounded-full flex-none ${groupDotColor[group.urgency]}`} />
-                  {group.label}
-                  <span className="text-muted-foreground font-medium normal-case tracking-normal">
-                    · {group.count}
+        {groups
+          ? groups.map((group) => (
+              <React.Fragment key={group.label}>
+                <div className="px-4 py-2 bg-sand-100 border-b border-sand-400 sticky top-0">
+                  <span className="inline-flex items-center gap-2 text-[11.5px] font-semibold uppercase tracking-[0.06em] text-maroon-600">
+                    <span
+                      className={`w-2 h-2 rounded-full flex-none ${groupDotColor[group.urgency]}`}
+                    />
+                    {group.label}
+                    <span className="text-muted-foreground font-medium normal-case tracking-normal">
+                      · {group.count}
+                    </span>
                   </span>
-                </span>
-              </div>
-              {group.rows.map((row) => (
-                <CardRow key={row.key} row={row} columns={columns} />
-              ))}
-            </React.Fragment>
-          ))
-        ) : (
-          allRows.map((row) => <CardRow key={row.key} row={row} columns={columns} />)
-        )}
+                </div>
+                {group.rows.map((row) => (
+                  <CardRow key={row.key} row={row} columns={columns} />
+                ))}
+              </React.Fragment>
+            ))
+          : allRows.map((row) => <CardRow key={row.key} row={row} columns={columns} />)}
       </div>
 
       {/* Desktop: table layout (sm+) */}

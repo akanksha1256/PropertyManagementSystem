@@ -8,13 +8,7 @@ const CardRow = ({ labelCls, valueCls }: { labelCls: string; valueCls: string })
   </div>
 );
 
-const InfoCard = ({
-  titleCls,
-  children,
-}: {
-  titleCls: string;
-  children: React.ReactNode;
-}) => (
+const InfoCard = ({ titleCls, children }: { titleCls: string; children: React.ReactNode }) => (
   <div className="rounded-xl border border-sand-400 bg-white">
     <div className="flex items-center gap-2 p-6">
       <Skeleton className="h-4 w-4 rounded flex-none" />

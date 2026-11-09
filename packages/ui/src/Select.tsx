@@ -19,7 +19,14 @@ interface SelectProps {
   disabled?: boolean;
 }
 
-export const Select = ({ value, onChange, options, placeholder, className = "", disabled = false }: SelectProps) => {
+export const Select = ({
+  value,
+  onChange,
+  options,
+  placeholder,
+  className = "",
+  disabled = false,
+}: SelectProps) => {
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState<{ top: number; left: number; width: number } | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -40,7 +47,11 @@ export const Select = ({ value, onChange, options, placeholder, className = "", 
     const rect = triggerRef.current.getBoundingClientRect();
     const spaceBelow = window.innerHeight - rect.bottom;
     if (spaceBelow < 260) {
-      setPos({ top: rect.top - Math.min(240, options.length * 36 + 8) - 4, left: rect.left, width: rect.width });
+      setPos({
+        top: rect.top - Math.min(240, options.length * 36 + 8) - 4,
+        left: rect.left,
+        width: rect.width,
+      });
     } else {
       setPos({ top: rect.bottom + 4, left: rect.left, width: rect.width });
     }

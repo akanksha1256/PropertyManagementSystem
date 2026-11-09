@@ -2,41 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     /* Brand primitives */
-    --coral-50: #FFF5F1;
-    --coral-100: #FFE7DE;
-    --coral-200: #FFC9B7;
-    --coral-500: #FF6139;
-    --coral-600: #E84E27;
-    --coral-700: #C53F1E;
-    --maroon-500: #8A4140;
+    --coral-50: #fff5f1;
+    --coral-100: #ffe7de;
+    --coral-200: #ffc9b7;
+    --coral-500: #ff6139;
+    --coral-600: #e84e27;
+    --coral-700: #c53f1e;
+    --maroon-500: #8a4140;
     --maroon-600: #733635;
-    --maroon-700: #5C2A29;
-    --teal-100: #E9F2F2;
-    --teal-200: #CDE2E3;
-    --teal-300: #A1CACC;
-    --teal-600: #5E8E90;
+    --maroon-700: #5c2a29;
+    --teal-100: #e9f2f2;
+    --teal-200: #cde2e3;
+    --teal-300: #a1cacc;
+    --teal-600: #5e8e90;
     --teal-700: #467173;
-    --espresso-300: #B9A7A4;
-    --espresso-500: #7A625F;
-    --espresso-700: #5A3F3C;
-    --espresso-900: #371F1D;
-    --sand-100: #F3F4E9;
-    --sand-200: #EBECDC;
-    --sand-400: #D9DAC4;
-    --cream: #F5F5ED;
+    --espresso-300: #b9a7a4;
+    --espresso-500: #7a625f;
+    --espresso-700: #5a3f3c;
+    --espresso-900: #371f1d;
+    --sand-100: #f3f4e9;
+    --sand-200: #ebecdc;
+    --sand-400: #d9dac4;
+    --cream: #f5f5ed;
 
     /* Semantic tokens */
-    --background: #FFFFFF;
+    --background: #ffffff;
     --foreground: var(--espresso-900);
-    --card: #FFFFFF;
+    --card: #ffffff;
     --muted: var(--sand-200);
     --muted-foreground: var(--espresso-500);
     --primary: var(--coral-500);
-    --primary-foreground: #FFFFFF;
+    --primary-foreground: #ffffff;
     --secondary: var(--sand-200);
     --secondary-foreground: var(--espresso-900);
     --accent: var(--teal-100);
@@ -47,19 +46,19 @@
     --inverse: var(--espresso-900);
 
     /* Status */
-    --destructive: #C8341B;
-    --destructive-bg: #FCEBE7;
-    --warning: #C98A12;
-    --warning-bg: #FBF1DD;
-    --info: #5C7196;
+    --destructive: #c8341b;
+    --destructive-bg: #fcebe7;
+    --warning: #c98a12;
+    --warning-bg: #fbf1dd;
+    --info: #5c7196;
     --success: var(--teal-700);
     --success-bg: var(--teal-100);
 
     /* Shadows (warm undertone) */
-    --shadow-sm: 0 1px 2px rgba(55,31,29,.05);
-    --shadow-md: 0 4px 14px -4px rgba(55,31,29,.10);
-    --shadow-lg: 0 12px 32px -8px rgba(55,31,29,.16);
-    --shadow-xl: 0 20px 50px -12px rgba(55,31,29,.30);
+    --shadow-sm: 0 1px 2px rgba(55, 31, 29, 0.05);
+    --shadow-md: 0 4px 14px -4px rgba(55, 31, 29, 0.1);
+    --shadow-lg: 0 12px 32px -8px rgba(55, 31, 29, 0.16);
+    --shadow-xl: 0 20px 50px -12px rgba(55, 31, 29, 0.3);
 
     /* Motion */
     --dur-fast: 100ms;
@@ -91,7 +90,9 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -102,8 +103,12 @@
 @layer utilities {
   /* Shimmer skeleton animation */
   @keyframes shimmer {
-    0%   { background-position: 100% 0; }
-    100% { background-position: -100% 0; }
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
   }
 
   .skeleton {
@@ -120,35 +125,80 @@
 
   /* Teal flash for optimistic success */
   @keyframes flash-success {
-    0%   { background-color: var(--teal-100); }
-    100% { background-color: transparent; }
+    0% {
+      background-color: var(--teal-100);
+    }
+    100% {
+      background-color: transparent;
+    }
   }
 
   /* Red flash for optimistic rollback */
   @keyframes flash-error {
-    0%   { background-color: var(--destructive-bg); }
-    100% { background-color: transparent; }
+    0% {
+      background-color: var(--destructive-bg);
+    }
+    100% {
+      background-color: transparent;
+    }
   }
 
-  .flash-success { animation: flash-success 600ms var(--ease) forwards; }
-  .flash-error   { animation: flash-error   600ms var(--ease) forwards; }
+  .flash-success {
+    animation: flash-success 600ms var(--ease) forwards;
+  }
+  .flash-error {
+    animation: flash-error 600ms var(--ease) forwards;
+  }
 
   /* Type scale utilities */
   .t-display {
-    font-family: 'Sentient', Georgia, serif;
+    font-family: "Sentient", Georgia, serif;
     font-size: 48px;
     font-weight: 600;
     line-height: 1.1;
     letter-spacing: -0.01em;
   }
-  .t-h1 { font-size: 36px; font-weight: 600; line-height: 1.1; }
-  .t-h2 { font-size: 28px; font-weight: 600; line-height: 1.2; }
-  .t-h3 { font-size: 22px; font-weight: 600; line-height: 1.3; }
-  .t-h4 { font-size: 18px; font-weight: 600; line-height: 1.3; }
-  .t-body    { font-size: 16px; font-weight: 400; line-height: 1.5; }
-  .t-body-sm { font-size: 14px; font-weight: 400; line-height: 1.4; }
-  .t-label   { font-size: 14px; font-weight: 500; line-height: 1.4; }
-  .t-caption { font-size: 12px; font-weight: 400; line-height: 1.3; color: var(--muted-foreground); }
+  .t-h1 {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .t-h2 {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .t-h3 {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .t-h4 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .t-body {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .t-body-sm {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .t-label {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .t-caption {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--muted-foreground);
+  }
   .t-overline {
     font-size: 13px;
     font-weight: 500;
@@ -157,11 +207,13 @@
     text-transform: uppercase;
     color: var(--muted-foreground);
   }
-  .t-mono { font-family: 'JetBrains Mono', monospace; }
+  .t-mono {
+    font-family: "JetBrains Mono", monospace;
+  }
 
   /* Sentient display for big money figures */
   .t-money {
-    font-family: 'Sentient', Georgia, serif;
+    font-family: "Sentient", Georgia, serif;
     font-size: 44px;
     font-weight: 600;
     line-height: 1;

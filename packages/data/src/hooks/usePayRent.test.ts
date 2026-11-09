@@ -94,9 +94,7 @@ describe("usePayRent - optimistic update", () => {
     });
 
     await waitFor(() => {
-      const cached = queryClient.getQueryData<typeof dashboardData>(
-        tenantDashboardKey("tenant-1"),
-      );
+      const cached = queryClient.getQueryData<typeof dashboardData>(tenantDashboardKey("tenant-1"));
       expect(cached?.payments[0].status).toBe("paid");
       expect(cached?.payments[0].amountPaid).toBe(1800);
     });
@@ -106,7 +104,16 @@ describe("usePayRent - optimistic update", () => {
     vi.mocked(api.payRent).mockImplementationOnce(
       () =>
         new Promise<Payment>((resolve) => {
-          setTimeout(() => resolve({ ...outstandingPayment, status: "paid", amountPaid: 1800, paidDate: new Date().toISOString() }), 100);
+          setTimeout(
+            () =>
+              resolve({
+                ...outstandingPayment,
+                status: "paid",
+                amountPaid: 1800,
+                paidDate: new Date().toISOString(),
+              }),
+            100,
+          );
         }),
     );
 

@@ -21,7 +21,11 @@ export const PaymentStatusSection = ({
   const pieData = paymentBreakdown
     ? [
         { name: s.paid, value: paymentBreakdown.paid, fill: colors.chart.paid },
-        { name: s.outstanding, value: paymentBreakdown.outstanding, fill: colors.chart.outstanding },
+        {
+          name: s.outstanding,
+          value: paymentBreakdown.outstanding,
+          fill: colors.chart.outstanding,
+        },
         { name: s.overdue, value: paymentBreakdown.overdue, fill: colors.chart.overdue },
       ].filter((d) => d.value > 0)
     : [];

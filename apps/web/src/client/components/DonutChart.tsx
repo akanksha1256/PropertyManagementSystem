@@ -1,7 +1,16 @@
 "use client";
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
-import { Card, CardHeader, CardTitle, CardContent, MetricValue, MetricCount, Overline, MutedText } from "@repo/ui";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  MetricValue,
+  MetricCount,
+  Overline,
+  MutedText,
+} from "@repo/ui";
 import { EmptyState } from "@/client/views/EmptyScreen";
 
 export interface DonutChartEntry {
@@ -96,7 +105,10 @@ export const DonutChart = ({
                       className="text-[12px] font-medium flex items-center gap-1.5 justify-center"
                       style={{ color: fill }}
                     >
-                      <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: fill }} />
+                      <span
+                        className="w-1.5 h-1.5 rounded-full inline-block"
+                        style={{ background: fill }}
+                      />
                       {name}
                     </span>
                     <span className="text-[11px] text-muted-foreground">

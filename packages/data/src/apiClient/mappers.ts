@@ -1,7 +1,13 @@
 import type * as P from "@repo/platform-types";
 import type { Property, PropertySummary, UnitDetailItem, PropertyDetailData } from "../types";
 import type { Unit } from "../types";
-import type { Tenant, TenantStanding, TenantProfile, TenantListItem, PaymentListItem } from "../types";
+import type {
+  Tenant,
+  TenantStanding,
+  TenantProfile,
+  TenantListItem,
+  PaymentListItem,
+} from "../types";
 import type { TenantDashboardData } from "../types";
 import type { Lease } from "../types";
 import type { Payment, PaymentMethod } from "../types";

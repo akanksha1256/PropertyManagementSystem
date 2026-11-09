@@ -79,7 +79,6 @@ export const PaymentsPage = () => {
     }
   };
 
-
   const filtered = useMemo(() => {
     if (!data) return [];
     let base = [...data];

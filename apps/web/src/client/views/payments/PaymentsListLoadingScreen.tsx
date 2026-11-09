@@ -24,7 +24,10 @@ export const PaymentsListSkeleton = () => (
           { val: "w-32", sub: "w-36" },
           { val: "w-16", sub: "w-40" },
         ].map((w, i) => (
-          <div key={i} className="rounded-xl border border-sand-400 bg-white px-5 py-4 flex flex-col gap-2">
+          <div
+            key={i}
+            className="rounded-xl border border-sand-400 bg-white px-5 py-4 flex flex-col gap-2"
+          >
             <Skeleton className="h-3 w-24" />
             <Skeleton className={`h-7 ${w.val}`} />
             <Skeleton className={`h-3 ${w.sub}`} />
@@ -43,7 +46,6 @@ export const PaymentsListSkeleton = () => (
     {/* Scrollable content */}
     <div className="flex-1 min-h-0 flex flex-col px-4 pb-4 md:px-8 md:pb-8">
       <div className="flex-1 min-h-0 rounded-xl border border-sand-400 bg-white overflow-hidden shadow-sm flex flex-col">
-
         {/* Mobile: card skeletons */}
         <div className="sm:hidden flex-1 overflow-y-auto divide-y divide-sand-200">
           {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -78,12 +80,24 @@ export const PaymentsListSkeleton = () => (
             </colgroup>
             <thead>
               <tr className="bg-sand-100 border-b border-sand-400">
-                <th className="px-5 py-3 text-left"><Skeleton className="h-3 w-12" /></th>
-                <th className="px-5 py-3 text-left"><Skeleton className="h-3 w-24" /></th>
-                <th className="px-5 py-3 text-right"><Skeleton className="h-3 w-14 ml-auto" /></th>
-                <th className="px-5 py-3 text-left"><Skeleton className="h-3 w-12" /></th>
-                <th className="px-5 py-3 text-left"><Skeleton className="h-3 w-14" /></th>
-                <th className="px-5 py-3 text-right"><Skeleton className="h-3 w-12 ml-auto" /></th>
+                <th className="px-5 py-3 text-left">
+                  <Skeleton className="h-3 w-12" />
+                </th>
+                <th className="px-5 py-3 text-left">
+                  <Skeleton className="h-3 w-24" />
+                </th>
+                <th className="px-5 py-3 text-right">
+                  <Skeleton className="h-3 w-14 ml-auto" />
+                </th>
+                <th className="px-5 py-3 text-left">
+                  <Skeleton className="h-3 w-12" />
+                </th>
+                <th className="px-5 py-3 text-left">
+                  <Skeleton className="h-3 w-14" />
+                </th>
+                <th className="px-5 py-3 text-right">
+                  <Skeleton className="h-3 w-12 ml-auto" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -114,7 +128,6 @@ export const PaymentsListSkeleton = () => (
             </tbody>
           </table>
         </div>
-
       </div>
     </div>
   </div>

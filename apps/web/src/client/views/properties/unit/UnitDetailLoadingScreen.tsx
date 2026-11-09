@@ -24,7 +24,6 @@ export const UnitDetailSkeleton = () => (
 
     {/* Info cards */}
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-8">
-
       {/* TenantCard */}
       <div className="rounded-xl border border-sand-400 bg-white">
         <div className="flex items-center gap-2 p-6">

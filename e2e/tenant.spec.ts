@@ -6,9 +6,7 @@ test.describe("Tenant dashboard", () => {
   test("loads with the personalised welcome heading", async ({ page }) => {
     await page.goto("/tenant");
 
-    await expect(
-      page.getByRole("heading", { name: "Welcome back, Alice Johnson" }),
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Welcome back, Alice Johnson" })).toBeVisible();
   });
 
   test("shows the three info cards", async ({ page }) => {

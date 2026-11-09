@@ -154,7 +154,11 @@ export const api = {
       mapPaymentMethod,
     ),
 
-  createTenant: async (data: { name: string; email: string; contact?: string }): Promise<{ id: string; name: string; email: string; contact: string }> => {
+  createTenant: async (data: {
+    name: string;
+    email: string;
+    contact?: string;
+  }): Promise<{ id: string; name: string; email: string; contact: string }> => {
     const res = await request<{ tenant: P.Tenant }>("/tenants", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

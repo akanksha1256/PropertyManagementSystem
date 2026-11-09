@@ -29,7 +29,9 @@ export const DevToolbar = () => {
           onClick={() => setFailMode(false)}
           className={[
             "rounded-full px-3 py-1 text-[12px] font-semibold transition-all duration-normal",
-            !fail ? "bg-teal-600 text-white shadow-sm" : "text-muted-foreground hover:text-espresso-900",
+            !fail
+              ? "bg-teal-600 text-white shadow-sm"
+              : "text-muted-foreground hover:text-espresso-900",
           ].join(" ")}
         >
           {s.ok}
@@ -38,7 +40,9 @@ export const DevToolbar = () => {
           onClick={() => setFailMode(true)}
           className={[
             "rounded-full px-3 py-1 text-[12px] font-semibold transition-all duration-normal",
-            fail ? "bg-destructive text-white shadow-sm" : "text-muted-foreground hover:text-espresso-900",
+            fail
+              ? "bg-destructive text-white shadow-sm"
+              : "text-muted-foreground hover:text-espresso-900",
           ].join(" ")}
         >
           {s.fail}
@@ -52,7 +56,9 @@ export const DevToolbar = () => {
           onClick={() => setDelayMode(false)}
           className={[
             "rounded-full px-3 py-1 text-[12px] font-semibold transition-all duration-normal",
-            !noDelay ? "bg-white text-espresso-900 shadow-sm" : "text-muted-foreground hover:text-espresso-900",
+            !noDelay
+              ? "bg-white text-espresso-900 shadow-sm"
+              : "text-muted-foreground hover:text-espresso-900",
           ].join(" ")}
         >
           {s.delay}
@@ -61,7 +67,9 @@ export const DevToolbar = () => {
           onClick={() => setDelayMode(true)}
           className={[
             "rounded-full px-3 py-1 text-[12px] font-semibold transition-all duration-normal",
-            noDelay ? "bg-white text-espresso-900 shadow-sm" : "text-muted-foreground hover:text-espresso-900",
+            noDelay
+              ? "bg-white text-espresso-900 shadow-sm"
+              : "text-muted-foreground hover:text-espresso-900",
           ].join(" ")}
         >
           {s.fast}

@@ -6,11 +6,8 @@ export function useCreateProperty() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: {
-      name: string;
-      address: string;
-      units: string[];
-    }) => api.createProperty(data),
+    mutationFn: (data: { name: string; address: string; units: string[] }) =>
+      api.createProperty(data),
 
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: MANAGER_DASHBOARD_KEY });

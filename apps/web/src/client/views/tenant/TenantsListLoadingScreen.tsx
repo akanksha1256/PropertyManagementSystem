@@ -75,11 +75,21 @@ export const TenantsListSkeleton = () => (
           </colgroup>
           <thead>
             <tr className="bg-sand-100 border-b border-sand-400">
-              <th className="px-5 py-3 text-left"><Skeleton className="h-3 w-12" /></th>
-              <th className="px-5 py-3 text-left"><Skeleton className="h-3 w-24" /></th>
-              <th className="px-5 py-3 text-right"><Skeleton className="h-3 w-14 ml-auto" /></th>
-              <th className="px-5 py-3 text-right"><Skeleton className="h-3 w-16 ml-auto" /></th>
-              <th className="px-5 py-3 text-right"><Skeleton className="h-3 w-8 ml-auto" /></th>
+              <th className="px-5 py-3 text-left">
+                <Skeleton className="h-3 w-12" />
+              </th>
+              <th className="px-5 py-3 text-left">
+                <Skeleton className="h-3 w-24" />
+              </th>
+              <th className="px-5 py-3 text-right">
+                <Skeleton className="h-3 w-14 ml-auto" />
+              </th>
+              <th className="px-5 py-3 text-right">
+                <Skeleton className="h-3 w-16 ml-auto" />
+              </th>
+              <th className="px-5 py-3 text-right">
+                <Skeleton className="h-3 w-8 ml-auto" />
+              </th>
               <th />
             </tr>
           </thead>

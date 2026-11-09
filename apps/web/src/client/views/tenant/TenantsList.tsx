@@ -219,8 +219,13 @@ const KYC_OPTIONS = [
   { value: "not_submitted", label: "Not submitted" },
 ];
 
-
-const PAYMENT_RANK: Record<string, number> = { overdue: 0, outstanding: 1, paid: 2, upcoming: 3, vacant: 4 };
+const PAYMENT_RANK: Record<string, number> = {
+  overdue: 0,
+  outstanding: 1,
+  paid: 2,
+  upcoming: 3,
+  vacant: 4,
+};
 const KYC_RANK: Record<string, number> = { not_submitted: 0, pending: 1, verified: 2 };
 
 const SortIcon = ({ active, dir }: { active: boolean; dir: SortDir }) => {
@@ -338,21 +343,34 @@ const TenantCard = ({ item }: { item: TenantListItem }) => {
   const router = useRouter();
   const { tenant, lease, unit, property, paymentStatus } = item;
   const kycClass = KYC_CLASS[tenant.kycStatus] ?? KYC_CLASS.not_submitted;
-  const initials = tenant.name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+  const initials = tenant.name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
   const payBadgeVariant =
-    paymentStatus === "overdue" ? "overdue"
-    : paymentStatus === "outstanding" ? "outstanding"
-    : paymentStatus === "paid" ? "paid"
-    : paymentStatus === "upcoming" ? "upcoming"
-    : "vacant" as const;
+    paymentStatus === "overdue"
+      ? "overdue"
+      : paymentStatus === "outstanding"
+        ? "outstanding"
+        : paymentStatus === "paid"
+          ? "paid"
+          : paymentStatus === "upcoming"
+            ? "upcoming"
+            : ("vacant" as const);
 
   const payBadgeLabel =
-    paymentStatus === "vacant" ? "No lease"
-    : paymentStatus === "overdue" ? "Overdue"
-    : paymentStatus === "outstanding" ? "Outstanding"
-    : paymentStatus === "upcoming" ? "Upcoming"
-    : "Paid";
+    paymentStatus === "vacant"
+      ? "No lease"
+      : paymentStatus === "overdue"
+        ? "Overdue"
+        : paymentStatus === "outstanding"
+          ? "Outstanding"
+          : paymentStatus === "upcoming"
+            ? "Upcoming"
+            : "Paid";
 
   return (
     <div
@@ -372,7 +390,9 @@ const TenantCard = ({ item }: { item: TenantListItem }) => {
             <div className="text-[12px] text-muted-foreground truncate">{tenant.email}</div>
           </div>
         </div>
-        <Badge variant={payBadgeVariant} size="sm">{payBadgeLabel}</Badge>
+        <Badge variant={payBadgeVariant} size="sm">
+          {payBadgeLabel}
+        </Badge>
       </div>
 
       {/* Property + rent */}
@@ -394,7 +414,9 @@ const TenantCard = ({ item }: { item: TenantListItem }) => {
       </div>
 
       {/* KYC pill */}
-      <span className={`inline-flex items-center gap-1.5 text-[12px] font-medium px-2.5 py-1 rounded-full ${kycClass}`}>
+      <span
+        className={`inline-flex items-center gap-1.5 text-[12px] font-medium px-2.5 py-1 rounded-full ${kycClass}`}
+      >
         {KYC_ICON[tenant.kycStatus]}
         {KYC_LABEL[tenant.kycStatus]}
       </span>
@@ -510,7 +532,7 @@ export const TenantsList = () => {
             setSearch={setSearch}
             colLabels={FILTER_COL_LABELS}
             defaultCol="payment"
-            getOptions={(col) => col === "payment" ? PAYMENT_OPTIONS : KYC_OPTIONS}
+            getOptions={(col) => (col === "payment" ? PAYMENT_OPTIONS : KYC_OPTIONS)}
             resultCount={filtered.length}
             totalCount={data.length}
             strings={{
@@ -526,71 +548,71 @@ export const TenantsList = () => {
             <EmptyState title={s.noMatch} description={s.noMatchDescription} icon="inbox" />
           ) : (
             <>
-            {/* Mobile: card view */}
-            <div className="sm:hidden flex-1 min-h-0 rounded-xl border border-sand-400 bg-white shadow-sm overflow-y-auto">
-              {filtered.map((item) => (
-                <TenantCard key={item.tenant.id} item={item} />
-              ))}
-            </div>
+              {/* Mobile: card view */}
+              <div className="sm:hidden flex-1 min-h-0 rounded-xl border border-sand-400 bg-white shadow-sm overflow-y-auto">
+                {filtered.map((item) => (
+                  <TenantCard key={item.tenant.id} item={item} />
+                ))}
+              </div>
 
-            {/* Desktop: table view */}
-            <div className="hidden sm:flex flex-col flex-1 min-h-0 rounded-xl border border-sand-400 bg-white overflow-y-auto shadow-sm">
-              <table className="w-full table-fixed min-w-[700px]">
-                <colgroup>
-                  <col style={{ width: "28%" }} />
-                  <col style={{ width: "22%" }} />
-                  <col style={{ width: "13%" }} />
-                  <col style={{ width: "17%" }} />
-                  <col style={{ width: "16%" }} />
-                  <col style={{ width: "40px" }} />
-                </colgroup>
-                <thead className="sticky top-0 z-10">
-                  <tr className="bg-sand-100 border-b border-sand-400">
-                    <th
-                      onClick={() => toggleSort("name")}
-                      className={`px-5 py-3 text-left text-[11.5px] font-semibold uppercase tracking-[0.06em] cursor-pointer select-none transition-colors ${sortCol === "name" ? "text-espresso-900" : "text-muted-foreground hover:text-espresso-700"}`}
-                    >
-                      <span className="inline-flex items-center gap-1">
-                        Tenant <SortIcon active={sortCol === "name"} dir={sortDir} />
-                      </span>
-                    </th>
-                    <th className="px-5 py-3 text-left text-[11.5px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">
-                      Property / Unit
-                    </th>
-                    <th
-                      onClick={() => toggleSort("rent")}
-                      className={`px-5 py-3 text-right text-[11.5px] font-semibold uppercase tracking-[0.06em] cursor-pointer select-none transition-colors ${sortCol === "rent" ? "text-espresso-900" : "text-muted-foreground hover:text-espresso-700"}`}
-                    >
-                      <span className="inline-flex items-center gap-1 justify-end w-full">
-                        Rent/mo <SortIcon active={sortCol === "rent"} dir={sortDir} />
-                      </span>
-                    </th>
-                    <th
-                      onClick={() => toggleSort("payment")}
-                      className={`px-5 py-3 text-right text-[11.5px] font-semibold uppercase tracking-[0.06em] cursor-pointer select-none transition-colors ${sortCol === "payment" ? "text-espresso-900" : "text-muted-foreground hover:text-espresso-700"}`}
-                    >
-                      <span className="inline-flex items-center gap-1 justify-end w-full">
-                        Payment <SortIcon active={sortCol === "payment"} dir={sortDir} />
-                      </span>
-                    </th>
-                    <th
-                      onClick={() => toggleSort("kyc")}
-                      className={`px-5 py-3 text-right text-[11.5px] font-semibold uppercase tracking-[0.06em] cursor-pointer select-none transition-colors ${sortCol === "kyc" ? "text-espresso-900" : "text-muted-foreground hover:text-espresso-700"}`}
-                    >
-                      <span className="inline-flex items-center gap-1 justify-end w-full">
-                        KYC <SortIcon active={sortCol === "kyc"} dir={sortDir} />
-                      </span>
-                    </th>
-                    <th />
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.map((item) => (
-                    <TenantRow key={item.tenant.id} item={item} />
-                  ))}
-                </tbody>
-              </table>
-            </div>
+              {/* Desktop: table view */}
+              <div className="hidden sm:flex flex-col flex-1 min-h-0 rounded-xl border border-sand-400 bg-white overflow-y-auto shadow-sm">
+                <table className="w-full table-fixed min-w-[700px]">
+                  <colgroup>
+                    <col style={{ width: "28%" }} />
+                    <col style={{ width: "22%" }} />
+                    <col style={{ width: "13%" }} />
+                    <col style={{ width: "17%" }} />
+                    <col style={{ width: "16%" }} />
+                    <col style={{ width: "40px" }} />
+                  </colgroup>
+                  <thead className="sticky top-0 z-10">
+                    <tr className="bg-sand-100 border-b border-sand-400">
+                      <th
+                        onClick={() => toggleSort("name")}
+                        className={`px-5 py-3 text-left text-[11.5px] font-semibold uppercase tracking-[0.06em] cursor-pointer select-none transition-colors ${sortCol === "name" ? "text-espresso-900" : "text-muted-foreground hover:text-espresso-700"}`}
+                      >
+                        <span className="inline-flex items-center gap-1">
+                          Tenant <SortIcon active={sortCol === "name"} dir={sortDir} />
+                        </span>
+                      </th>
+                      <th className="px-5 py-3 text-left text-[11.5px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">
+                        Property / Unit
+                      </th>
+                      <th
+                        onClick={() => toggleSort("rent")}
+                        className={`px-5 py-3 text-right text-[11.5px] font-semibold uppercase tracking-[0.06em] cursor-pointer select-none transition-colors ${sortCol === "rent" ? "text-espresso-900" : "text-muted-foreground hover:text-espresso-700"}`}
+                      >
+                        <span className="inline-flex items-center gap-1 justify-end w-full">
+                          Rent/mo <SortIcon active={sortCol === "rent"} dir={sortDir} />
+                        </span>
+                      </th>
+                      <th
+                        onClick={() => toggleSort("payment")}
+                        className={`px-5 py-3 text-right text-[11.5px] font-semibold uppercase tracking-[0.06em] cursor-pointer select-none transition-colors ${sortCol === "payment" ? "text-espresso-900" : "text-muted-foreground hover:text-espresso-700"}`}
+                      >
+                        <span className="inline-flex items-center gap-1 justify-end w-full">
+                          Payment <SortIcon active={sortCol === "payment"} dir={sortDir} />
+                        </span>
+                      </th>
+                      <th
+                        onClick={() => toggleSort("kyc")}
+                        className={`px-5 py-3 text-right text-[11.5px] font-semibold uppercase tracking-[0.06em] cursor-pointer select-none transition-colors ${sortCol === "kyc" ? "text-espresso-900" : "text-muted-foreground hover:text-espresso-700"}`}
+                      >
+                        <span className="inline-flex items-center gap-1 justify-end w-full">
+                          KYC <SortIcon active={sortCol === "kyc"} dir={sortDir} />
+                        </span>
+                      </th>
+                      <th />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filtered.map((item) => (
+                      <TenantRow key={item.tenant.id} item={item} />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </>
           )}
         </div>

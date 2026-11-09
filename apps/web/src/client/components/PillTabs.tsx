@@ -14,11 +14,13 @@ export interface PillTab<K extends string = string> {
 const COLOR_CONFIG: Record<TabColorScheme, { active: string; inactive: string }> = {
   default: {
     active: "bg-espresso-900 border-espresso-900 text-white hover:bg-espresso-800",
-    inactive: "border-espresso-300 text-espresso-600 hover:border-espresso-600 hover:text-espresso-900",
+    inactive:
+      "border-espresso-300 text-espresso-600 hover:border-espresso-600 hover:text-espresso-900",
   },
   overdue: {
     active: "bg-destructive border-destructive text-white hover:bg-red-700",
-    inactive: "border-destructive/50 text-destructive hover:border-destructive hover:bg-destructive/5",
+    inactive:
+      "border-destructive/50 text-destructive hover:border-destructive hover:bg-destructive/5",
   },
   outstanding: {
     active: "bg-warning border-warning text-espresso-900",
@@ -47,7 +49,12 @@ export const PillTabs = <K extends string>({
   onChange,
   className,
 }: PillTabsProps<K>) => (
-  <div className={cn("flex items-center gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden", className)}>
+  <div
+    className={cn(
+      "flex items-center gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
+      className,
+    )}
+  >
     {tabs.map(({ key, label, count, color = "default" }) => {
       const isActive = activeTab === key;
       const styles = COLOR_CONFIG[color];

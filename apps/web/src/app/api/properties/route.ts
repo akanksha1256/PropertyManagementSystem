@@ -9,8 +9,10 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { name, address, units: unitLabels } = body;
 
-    if (!name?.trim()) return NextResponse.json({ message: "Property name is required" }, { status: 400 });
-    if (!address?.trim()) return NextResponse.json({ message: "Address is required" }, { status: 400 });
+    if (!name?.trim())
+      return NextResponse.json({ message: "Property name is required" }, { status: 400 });
+    if (!address?.trim())
+      return NextResponse.json({ message: "Address is required" }, { status: 400 });
 
     // Inherit manager info from the first existing property (single-manager demo)
     const ref = db.properties[0];

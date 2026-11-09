@@ -24,7 +24,10 @@ export const ManagerDashboardSkeleton = () => {
         <div className="bg-white p-5 md:p-6 space-y-3">
           <Skeleton className="h-3 w-24" />
           {[1, 2, 3].map((i) => (
-            <div key={i} className="flex justify-between items-center pt-3 border-t border-sand-200">
+            <div
+              key={i}
+              className="flex justify-between items-center pt-3 border-t border-sand-200"
+            >
               <div className="space-y-1.5">
                 <Skeleton className="h-3 w-28" />
                 <Skeleton className="h-2.5 w-36" />

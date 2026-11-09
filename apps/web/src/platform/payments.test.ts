@@ -1,5 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { daysOverdue, getDueWindowEnd, isOverdue, resolvePaymentStatus, resolvePayments, withResolvedStatus } from "./payments";
+import {
+  daysOverdue,
+  getDueWindowEnd,
+  isOverdue,
+  resolvePaymentStatus,
+  resolvePayments,
+  withResolvedStatus,
+} from "./payments";
 import type { Payment } from "@repo/platform-types";
 
 const unpaid = (periodMonth: string, status: Payment["status"] = "outstanding"): Payment => ({
@@ -103,10 +110,7 @@ describe("resolvePaymentStatus", () => {
 
   it("returns overdue for a partial payment past the window", () => {
     expect(
-      resolvePaymentStatus(
-        { ...unpaid("2026-06"), amount_paid: 500 },
-        new Date(2026, 5, 6),
-      ),
+      resolvePaymentStatus({ ...unpaid("2026-06"), amount_paid: 500 }, new Date(2026, 5, 6)),
     ).toBe("overdue");
   });
 });

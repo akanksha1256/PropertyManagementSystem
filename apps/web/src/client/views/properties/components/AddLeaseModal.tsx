@@ -3,7 +3,17 @@
 import { useState, useRef, useEffect } from "react";
 import { useCreateLease, useCreateTenant, useAllTenants } from "@repo/data";
 import type { UnitDetailItem } from "@repo/data";
-import { Skeleton, useToast, MutedText, StateTitle, CloseButton, LabeledTextField, FieldLabel, Button, Select } from "@repo/ui";
+import {
+  Skeleton,
+  useToast,
+  MutedText,
+  StateTitle,
+  CloseButton,
+  LabeledTextField,
+  FieldLabel,
+  Button,
+  Select,
+} from "@repo/ui";
 import type { SelectOption } from "@repo/ui";
 import { strings } from "@repo/tokens";
 
@@ -184,7 +194,10 @@ export const AddLeaseModal = ({
                 <LabeledTextField
                   label={sl.newTenant.fieldName}
                   value={newName}
-                  onChange={(v) => { setNewName(v); setErrors((er) => ({ ...er, newName: "" })); }}
+                  onChange={(v) => {
+                    setNewName(v);
+                    setErrors((er) => ({ ...er, newName: "" }));
+                  }}
                   placeholder={sl.newTenant.fieldNamePlaceholder}
                   error={errors.newName}
                   disabled={isPending}
@@ -193,7 +206,10 @@ export const AddLeaseModal = ({
                   label={sl.newTenant.fieldEmail}
                   type="email"
                   value={newEmail}
-                  onChange={(v) => { setNewEmail(v); setErrors((er) => ({ ...er, newEmail: "" })); }}
+                  onChange={(v) => {
+                    setNewEmail(v);
+                    setErrors((er) => ({ ...er, newEmail: "" }));
+                  }}
                   placeholder={sl.newTenant.fieldEmailPlaceholder}
                   error={errors.newEmail}
                   disabled={isPending}
@@ -215,7 +231,10 @@ export const AddLeaseModal = ({
             type="number"
             min="1"
             value={rent}
-            onChange={(v) => { setRent(v); setErrors((er) => ({ ...er, rent: "" })); }}
+            onChange={(v) => {
+              setRent(v);
+              setErrors((er) => ({ ...er, rent: "" }));
+            }}
             placeholder={sl.fieldRentPlaceholder}
             error={errors.rent}
             prefix="$"
@@ -228,7 +247,10 @@ export const AddLeaseModal = ({
               label={sl.fieldStartDate}
               type="date"
               value={startDate}
-              onChange={(v) => { setStartDate(v); setErrors((er) => ({ ...er, startDate: "" })); }}
+              onChange={(v) => {
+                setStartDate(v);
+                setErrors((er) => ({ ...er, startDate: "" }));
+              }}
               error={errors.startDate}
               disabled={isPending}
             />
@@ -237,7 +259,10 @@ export const AddLeaseModal = ({
               type="date"
               value={endDate}
               min={startDate}
-              onChange={(v) => { setEndDate(v); setErrors((er) => ({ ...er, endDate: "" })); }}
+              onChange={(v) => {
+                setEndDate(v);
+                setErrors((er) => ({ ...er, endDate: "" }));
+              }}
               error={errors.endDate}
               disabled={isPending}
             />

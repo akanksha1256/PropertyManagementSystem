@@ -47,7 +47,13 @@ const generateId = vi.fn((prefix: string) => `${prefix}-new`);
 vi.mock("@/platform/db", () => ({ db: mockDb, generateId }));
 vi.mock("@/platform/utils", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/platform/utils")>();
-  return { ...actual, withDelay: vi.fn().mockImplementation(async (req: import('next/server').NextRequest) => { if (req.nextUrl.searchParams.get('fail') === 'true') throw new Error('Forced failure (fail=true)'); }) };
+  return {
+    ...actual,
+    withDelay: vi.fn().mockImplementation(async (req: import("next/server").NextRequest) => {
+      if (req.nextUrl.searchParams.get("fail") === "true")
+        throw new Error("Forced failure (fail=true)");
+    }),
+  };
 });
 
 beforeEach(() => {

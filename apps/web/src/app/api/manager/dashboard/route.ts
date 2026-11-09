@@ -19,7 +19,9 @@ export async function GET(req: NextRequest) {
     const properties: PropertySummary[] = db.properties.map((prop) => {
       const units = db.units.filter((u) => u.property_id === prop.id);
       const leases = units.flatMap((u) => db.leases.filter((l) => l.unit_id === u.id));
-      const payments = resolvePayments(leases.flatMap((l) => db.payments.filter((p) => p.lease_id === l.id)));
+      const payments = resolvePayments(
+        leases.flatMap((l) => db.payments.filter((p) => p.lease_id === l.id)),
+      );
 
       const total_rent = leases.reduce((s, l) => s + l.monthly_rent, 0);
       const hasOverdue = payments.some((p) => p.status === "overdue");
@@ -110,7 +112,20 @@ export async function GET(req: NextRequest) {
       .slice(0, 6);
 
     // ── Monthly revenue (last 12 months, always 12 slots with zeros for empty) ─
-    const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
     const monthly_revenue: MonthlyRevenue[] = [];
 
     const now2 = new Date();

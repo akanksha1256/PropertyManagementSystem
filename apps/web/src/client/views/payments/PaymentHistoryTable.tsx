@@ -20,15 +20,22 @@ export const PaymentHistoryTable = ({
   tenantActions,
   flashStates,
 }: PaymentHistoryTableProps) => {
-  const header = count !== undefined ? (
-    <div className="flex items-center gap-2 mb-4">
-      <CreditCardIcon className="h-4 w-4 text-muted-foreground" />
-      <CardTitle>{s.heading}</CardTitle>
-      {!loading && <MutedText className="font-normal">({count})</MutedText>}
-    </div>
-  ) : null;
+  const header =
+    count !== undefined ? (
+      <div className="flex items-center gap-2 mb-4">
+        <CreditCardIcon className="h-4 w-4 text-muted-foreground" />
+        <CardTitle>{s.heading}</CardTitle>
+        {!loading && <MutedText className="font-normal">({count})</MutedText>}
+      </div>
+    ) : null;
 
-  if (loading) return <>{header}<PaymentHistoryTableSkeleton /></>;
+  if (loading)
+    return (
+      <>
+        {header}
+        <PaymentHistoryTableSkeleton />
+      </>
+    );
 
   if (payments.length === 0)
     return (

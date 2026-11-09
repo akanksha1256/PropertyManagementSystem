@@ -1,5 +1,12 @@
 // Utilities
-export { cn, formatDate, formatDateTime, formatPeriodMonth, hoursSince, statusConfig } from "./utils";
+export {
+  cn,
+  formatDate,
+  formatDateTime,
+  formatPeriodMonth,
+  hoursSince,
+  statusConfig,
+} from "./utils";
 
 // StatCard types
 export type { AccentType, StatCardProps } from "./statCard.types";

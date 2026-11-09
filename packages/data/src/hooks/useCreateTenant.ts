@@ -6,8 +6,7 @@ export function useCreateTenant() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: { name: string; email: string; contact?: string }) =>
-      api.createTenant(data),
+    mutationFn: (data: { name: string; email: string; contact?: string }) => api.createTenant(data),
 
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: allTenantsKey() });

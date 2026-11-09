@@ -39,8 +39,7 @@ export const StatusSection = ({
       : collectionDelta > 0
         ? `+${collectionDelta}%`
         : `${collectionDelta}%`;
-  const collectionTrendDir =
-    collectionDelta > 0 ? "up" : collectionDelta < 0 ? "down" : "flat";
+  const collectionTrendDir = collectionDelta > 0 ? "up" : collectionDelta < 0 ? "down" : "flat";
 
   const collectedSparkline = monthlyRevenue.map((m) =>
     m.expected > 0 ? Math.round((m.collected / m.expected) * 100) : 0,

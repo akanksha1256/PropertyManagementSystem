@@ -292,12 +292,12 @@ TanStack Query uses structured array keys for cache targeting and invalidation:
 
 ### New Routes Since Initial Design
 
-| Method | Path                     | Description                                        |
-| ------ | ------------------------ | -------------------------------------------------- |
-| GET    | `/api/manager/payments`  | Cross-portfolio payment list with tenant/property context |
-| GET    | `/api/tenants`           | Full tenant list with lease/unit/property context  |
-| POST   | `/api/tenants`           | Create a new tenant                                |
-| POST   | `/api/leases`            | Create a new lease                                 |
+| Method | Path                    | Description                                               |
+| ------ | ----------------------- | --------------------------------------------------------- |
+| GET    | `/api/manager/payments` | Cross-portfolio payment list with tenant/property context |
+| GET    | `/api/tenants`          | Full tenant list with lease/unit/property context         |
+| POST   | `/api/tenants`          | Create a new tenant                                       |
+| POST   | `/api/leases`           | Create a new lease                                        |
 
 ### Request / Response Convention
 
@@ -307,16 +307,16 @@ All requests go through `withDelay()` which adds an 800ms artificial delay. Any 
 
 Several fields returned by the API are derived at query time rather than stored:
 
-| Field                            | Derived How                                                                          |
-| -------------------------------- | ------------------------------------------------------------------------------------ |
-| `PropertySummary.status`         | Worst payment status across all units (`overdue > outstanding > upcoming > vacant > paid`) |
-| `PropertySummary.total_rent`     | Sum of `monthly_rent` across active leases                                           |
-| `TenantStanding`                 | `on_time_payments / total_payments × 100` → score → label (Excellent/Good/Fair/Poor) |
-| `DashboardStats.collection_rate` | `collected_this_month / total_monthly_rent × 100`                                    |
-| `MonthlyRevenue`                 | Aggregated from payments, last 12 months (always 12 slots, zeros for empty months)   |
-| `StatsTrend`                     | New leases this month, rent added this month, prior period's collection rate          |
-| `PaymentBreakdown.overdue_amount`| Sum of `amount_due` across all overdue payments                                      |
-| `AtRiskLease`                    | Denormalized row: tenant, property, unit, amount due, days overdue - sorted overdue-first |
+| Field                             | Derived How                                                                                |
+| --------------------------------- | ------------------------------------------------------------------------------------------ |
+| `PropertySummary.status`          | Worst payment status across all units (`overdue > outstanding > upcoming > vacant > paid`) |
+| `PropertySummary.total_rent`      | Sum of `monthly_rent` across active leases                                                 |
+| `TenantStanding`                  | `on_time_payments / total_payments × 100` → score → label (Excellent/Good/Fair/Poor)       |
+| `DashboardStats.collection_rate`  | `collected_this_month / total_monthly_rent × 100`                                          |
+| `MonthlyRevenue`                  | Aggregated from payments, last 12 months (always 12 slots, zeros for empty months)         |
+| `StatsTrend`                      | New leases this month, rent added this month, prior period's collection rate               |
+| `PaymentBreakdown.overdue_amount` | Sum of `amount_due` across all overdue payments                                            |
+| `AtRiskLease`                     | Denormalized row: tenant, property, unit, amount due, days overdue - sorted overdue-first  |
 
 ---
 
@@ -357,34 +357,34 @@ All pages are thin Next.js server components that simply render their correspond
 
 ## 11. What Was Built
 
-| Requirement                                | Status | Notes                                                                  |
-| ------------------------------------------ | ------ | ---------------------------------------------------------------------- |
-| Manager: list properties and units         | ✅     | Dashboard → Property → Unit drill-down; PillTab filter, search, sort   |
-| Manager: see rent status across leases     | ✅     | Status pills, payment history table, cross-portfolio payments page      |
-| Manager: send payment reminder             | ✅     | Per-row reminder + bulk "Send All Reminders" from AttentionHero        |
-| Manager: view payment history              | ✅     | Per-unit payment table + `/manager/payments` full list with filter/search/sort |
-| Manager: tenant detail with standing score | ✅     | On-time payment %, ScoreRing donut, KYC status                         |
-| Manager: create properties / leases / tenants | ✅  | AddPropertyModal, AddLeaseModal (with inline new-tenant), AddTenantModal |
-| Tenant: see lease and terms                | ✅     | Lease Details card                                                     |
-| Tenant: see payment history                | ✅     | Payment history table                                                  |
-| Tenant: pay current month's rent           | ✅     | Payment method picker + mocked pay flow, optimistic update             |
-| Optimistic updates                         | ✅     | Mark as Paid and Pay Rent with rollback on failure                     |
-| Loading / error / empty states             | ✅     | All views covered                                                      |
-| Mock delay + forced failure                | ✅     | `?fail=true` on any API route                                          |
-| Two-sided navigation                       | ✅     | `/manager` and `/tenant` routes                                        |
-| TanStack Query                             | ✅     | All data fetching via `useQuery` / `useMutation` hooks in `@repo/data` |
-| Monorepo packages                          | ✅     | `packages/tokens`, `packages/ui`, `packages/data`                      |
-| shadcn/ui                                  | ✅     | Button (cva + @base-ui/react), Sonner toast                            |
+| Requirement                                   | Status | Notes                                                                          |
+| --------------------------------------------- | ------ | ------------------------------------------------------------------------------ |
+| Manager: list properties and units            | ✅     | Dashboard → Property → Unit drill-down; PillTab filter, search, sort           |
+| Manager: see rent status across leases        | ✅     | Status pills, payment history table, cross-portfolio payments page             |
+| Manager: send payment reminder                | ✅     | Per-row reminder + bulk "Send All Reminders" from AttentionHero                |
+| Manager: view payment history                 | ✅     | Per-unit payment table + `/manager/payments` full list with filter/search/sort |
+| Manager: tenant detail with standing score    | ✅     | On-time payment %, ScoreRing donut, KYC status                                 |
+| Manager: create properties / leases / tenants | ✅     | AddPropertyModal, AddLeaseModal (with inline new-tenant), AddTenantModal       |
+| Tenant: see lease and terms                   | ✅     | Lease Details card                                                             |
+| Tenant: see payment history                   | ✅     | Payment history table                                                          |
+| Tenant: pay current month's rent              | ✅     | Payment method picker + mocked pay flow, optimistic update                     |
+| Optimistic updates                            | ✅     | Mark as Paid and Pay Rent with rollback on failure                             |
+| Loading / error / empty states                | ✅     | All views covered                                                              |
+| Mock delay + forced failure                   | ✅     | `?fail=true` on any API route                                                  |
+| Two-sided navigation                          | ✅     | `/manager` and `/tenant` routes                                                |
+| TanStack Query                                | ✅     | All data fetching via `useQuery` / `useMutation` hooks in `@repo/data`         |
+| Monorepo packages                             | ✅     | `packages/tokens`, `packages/ui`, `packages/data`                              |
+| shadcn/ui                                     | ✅     | Button (cva + @base-ui/react), Sonner toast                                    |
 
 ---
 
 ## 12. Known Trade-offs & What Would Be Done With More Time
 
-| Area                   | Current State                                        | With More Time                                                                            |
-| ---------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Authentication         | None - views are separated by route only             | JWT-based auth with role-based routing                                                    |
-| Real-time / sync       | Not implemented                                      | WebSocket or SSE for multi-tab sync                                                       |
+| Area                   | Current State                                              | With More Time                                                                       |
+| ---------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Authentication         | None - views are separated by route only                   | JWT-based auth with role-based routing                                               |
+| Real-time / sync       | Not implemented                                            | WebSocket or SSE for multi-tab sync                                                  |
 | Test coverage          | Platform unit tests (21), hook tests, API route tests, E2E | Expand to cover new hooks (useAllPayments, useCreateLease) and create-flow mutations |
-| Pagination             | All data loaded at once                              | Cursor-based pagination with TanStack Query's `useInfiniteQuery`                          |
-| Edit flows             | Create done; edit (lease terms, KYC) not implemented | Controlled forms using established mutation hook pattern                                  |
-| Optimistic rollback UX | Silent (no "undo" affordance)                        | Show inline error banner on the affected row with retry                                   |
+| Pagination             | All data loaded at once                                    | Cursor-based pagination with TanStack Query's `useInfiniteQuery`                     |
+| Edit flows             | Create done; edit (lease terms, KYC) not implemented       | Controlled forms using established mutation hook pattern                             |
+| Optimistic rollback UX | Silent (no "undo" affordance)                              | Show inline error banner on the affected row with retry                              |
