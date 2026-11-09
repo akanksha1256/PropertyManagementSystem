@@ -3,7 +3,7 @@
 ## 1. Project Structure
 
 ```
-KIaraAssignment/
+rent-portal/
 ├── apps/
 │   └── web/
 │       ├── src/
@@ -112,7 +112,6 @@ KIaraAssignment/
 │           └── utils.ts                          cn, formatDate, formatPeriodMonth, statusConfig
 │
 ├── turbo.json
-└── CLAUDE.md
 ```
 
 ---
@@ -647,7 +646,7 @@ Components use Tailwind class names for static colors (`text-espresso-900`, `bg-
 
 ## 10. Responsive / Mobile Architecture
 
-The second pass added full mobile support. This section documents the layout primitives that make it work consistently across views.
+The app has full mobile support. This section documents the layout primitives that make it work consistently across views.
 
 ### Nav — three rendering modes
 

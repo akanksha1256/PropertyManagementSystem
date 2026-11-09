@@ -16,7 +16,7 @@ A two-sided rent management portal built with Next.js 14, TanStack Query v5, Tai
 ```bash
 # 1. Clone the repo
 git clone <repo-url>
-cd KIaraAssignment
+cd rent-portal
 
 # 2. Install dependencies
 pnpm install
@@ -46,7 +46,7 @@ The app will be available at **http://localhost:3000**.
 ## Monorepo Structure
 
 ```
-KIaraAssignment/
+rent-portal/
 ├── apps/
 │   └── web/                  # Next.js 14 app (pages, API routes, view components)
 └── packages/
@@ -121,21 +121,6 @@ curl "http://localhost:3000/api/leases/lease-1/payments?fail=true"
 | `POST` | `/api/leases/[id]/remind`           | Send a payment reminder                                          |
 | `GET`  | `/api/tenants/[id]/payment-methods` | Saved payment methods for a tenant                               |
 | `POST` | `/api/tenants/[id]/payment-methods` | Add a new payment method                                         |
-
----
-
-## Second Pass — Design Feedback Addressed
-
-The first submission was reviewed and flagged on six points. Here is exactly what was missing and how each was resolved:
-
-| Feedback | What Was Missing | Resolution |
-| --- | --- | --- |
-| **No mobile support** | Sidebar always visible, tables desktop-only, no small-screen nav | Bottom nav bar at `<md`, slide-in sidebar drawer, card-per-row table fallback at `<sm` across all list views |
-| **Spinners instead of skeletons** | Generic `Loader2` spinner on every loading state — no layout preview | Every view now has a `*LoadingScreen.tsx` skeleton that mirrors the real content's grid and card structure, including responsive breakpoints |
-| **Stat cards lacked context** | Collection rate showed only "73%" — no dollar amounts | Card subtitle now shows "$X of $Y collected"; all four stat cards show SVG sparklines from 12 months of trend data |
-| **Mobile scroll broken** | PaymentsList and TenantsList showed only two rows on mobile | `overflow-hidden` on outer wrapper was clipping the card list; added `flex flex-col` + `flex-1 overflow-y-auto` on both mobile and desktop scroll divs |
-| **PaymentsTable header not rounded** | Table header corners were flush on large screens | `overflow-hidden` had been stripped when mobile/desktop divs were split; restored alongside `flex flex-col` on the outer wrapper |
-| **Modal keyboard trap fragile** | Manual `useEffect` Escape handler — no Tab/Shift+Tab focus trapping | Replaced with `focus-trap-react`: proper focus trap, Escape deactivation blocked during processing, `onDeactivate: onClose` handles all close paths |
 
 ---
 
