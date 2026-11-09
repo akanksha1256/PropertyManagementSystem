@@ -37,6 +37,8 @@ const STATUS_OPTIONS = [
 
 const AMOUNT_OPTIONS = s.amountOptions as unknown as { value: string; label: string }[];
 
+const STATUS_RANK: Record<string, number> = { overdue: 0, outstanding: 1, paid: 2 };
+
 function amountFn(value: string): (n: number) => boolean {
   if (value === "lt1k") return (n) => n < 1000;
   if (value === "1k2k") return (n) => n >= 1000 && n <= 2000;
@@ -77,7 +79,6 @@ export const PaymentsPage = () => {
     }
   };
 
-  const statusRank: Record<string, number> = { overdue: 0, outstanding: 1, paid: 2 };
 
   const filtered = useMemo(() => {
     if (!data) return [];
@@ -108,7 +109,7 @@ export const PaymentsPage = () => {
       if (sortCol === "paidOn")
         cmp = (a.payment.paidDate ?? "").localeCompare(b.payment.paidDate ?? "");
       if (sortCol === "status")
-        cmp = (statusRank[a.payment.status] ?? 0) - (statusRank[b.payment.status] ?? 0);
+        cmp = (STATUS_RANK[a.payment.status] ?? 0) - (STATUS_RANK[b.payment.status] ?? 0);
       if (sortCol === "amount") cmp = a.payment.amountDue - b.payment.amountDue;
       if (sortCol === "property") cmp = a.property.name.localeCompare(b.property.name);
       return sortDir === "asc" ? cmp : -cmp;
